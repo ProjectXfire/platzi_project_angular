@@ -1,0 +1,45 @@
+<div class="action">
+  <a mat-raised-button color="primary" routerLink="/admin/create"
+    >New product</a
+  >
+</div>
+
+<table class="mat-elevation-z8" mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="_id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element._id }}</td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef>Price</th>
+    <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <a
+        mat-flat-button
+        color="primary"
+        [routerLink]="['/admin/edit', element._id]"
+        >Edit</a
+      >
+      <button
+        mat-flat-button
+        color="warn"
+        type="button"
+        (click)="deleteProduct(element._id)"
+      >
+        Delete
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<mat-paginator
+  [pageSizeOptions]="[10, 20]"
+  showFirstLastButtons
+></mat-paginator>

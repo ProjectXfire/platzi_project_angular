@@ -1,0 +1,21 @@
+<div class="addSub">
+  <button
+    class="addSub_action"
+    (click)="sub()"
+    type="button"
+    mat-flat-button
+    color="warn"
+  >
+    -
+  </button>
+  <span class="addSub_action">{{ currentValue }}</span>
+  <button
+    class="addSub_action"
+    (click)="add()"
+    type="button"
+    mat-flat-button
+    color="primary"
+  >
+    +
+  </button>
+</div>

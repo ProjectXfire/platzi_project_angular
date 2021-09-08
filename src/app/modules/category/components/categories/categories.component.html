@@ -1,0 +1,26 @@
+<a
+  class="navigation"
+  mat-flat-button
+  color="primary"
+  routerLink="/admin/category/create"
+  >New category</a
+>
+
+<div class="container">
+  <mat-card class="card" *ngFor="let item of categories">
+    <mat-card-header>
+      <mat-card-title>{{ item.name }}</mat-card-title>
+    </mat-card-header>
+    <div class="container_image">
+      <img [src]="item.image" alt="Cat photo" />
+    </div>
+    <mat-card-actions>
+      <button mat-flat-button color="warn" (click)="deleteCategory(item._id)">
+        Delete
+      </button>
+      <a mat-flat-button color="primary" [routerLink]="['edit', item._id]">
+        Edit
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>

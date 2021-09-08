@@ -1,0 +1,26 @@
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input matInput [formControl]="search" />
+</mat-form-field>
+
+<ng-template [ngIf]="loading" [ngIfElse]="giphy_images">
+  <div class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-template #giphy_images>
+  <div class="container">
+    <mat-card class="card" *ngFor="let item of giphy">
+      <mat-card-header>
+        <mat-card-title>{{ item.name }}</mat-card-title>
+      </mat-card-header>
+      <div class="container_image">
+        <img [src]="item.url" alt="giphy" />
+      </div>
+      <mat-card-actions>
+        <button mat-flat-button color="warn">Like</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-template>

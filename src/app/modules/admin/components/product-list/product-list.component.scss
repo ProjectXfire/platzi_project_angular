@@ -1,0 +1,15 @@
+table {
+  width: 98%;
+  margin: 10px;
+  a {
+    margin-right: 5px;
+  }
+}
+
+.action {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-top: 10px;
+  padding-right: 10px;
+}

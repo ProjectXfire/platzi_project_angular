@@ -1,0 +1,15 @@
+<div class="Product__image">
+  <img [src]="product.image" [alt]="product.name" />
+</div>
+<div class="Product__info">
+  <h1>{{ product.name | uppercase }}</h1>
+  <strong>{{ product.price | currency }}</strong>
+  <p>{{ product.description }}</p>
+  <p>{{ today | date }}</p>
+</div>
+<div class="Product_actions">
+  <button mat-raised-button (click)="addToCart(product)">Add to cart</button>
+  <a mat-raised-button color="primary" [routerLink]="['/products', product._id]"
+    >Detail</a
+  >
+</div>

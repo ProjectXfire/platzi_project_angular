@@ -1,0 +1,21 @@
+<div *ngIf="product$ | async as product">
+  <article class="Product-detail">
+    <div class="Product-detail__image">
+      <img [src]="product.image" [alt]="product.name" />
+    </div>
+    <table class="Product-detail__info">
+      <tr>
+        <th>Name</th>
+        <td>{{ product.name }}</td>
+      </tr>
+      <tr>
+        <th>Price</th>
+        <td>{{ product.price | currency }}</td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>{{ product.description }}</td>
+      </tr>
+    </table>
+  </article>
+</div>

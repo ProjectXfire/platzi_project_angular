@@ -1,0 +1,14 @@
+.Product-detail {
+  display: flex;
+  width: 500px;
+  &__image {
+    img {
+      width: 300px;
+    }
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,103 @@
+<mat-horizontal-stepper linear #stepper>
+  <!-- Products data -->
+  <mat-step>
+    <ng-template matStepLabel>Order</ng-template>
+    <table *ngIf="products$ | async as products">
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+      <tr *ngFor="let product of products">
+        <td><img [src]="product.image" [alt]="product.name" /></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td class="actions">
+          <button class="warn" (click)="less(product.price)">-</button>
+          <mat-form-field class="actions__form-field">
+            <input matInput [formControl]="quantity" type="number" />
+          </mat-form-field>
+          <button class="primary" (click)="plus(product.price)">+</button>
+        </td>
+        <td>
+          <mat-form-field class="actions__form-field">
+            <input matInput [formControl]="quantity" type="number" />
+          </mat-form-field>
+        </td>
+      </tr>
+      <p *ngIf="products.length === 0">Empty order</p>
+    </table>
+  </mat-step>
+  <!-- User data -->
+  <mat-step>
+    <ng-template matStepLabel>Personnel data</ng-template>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input
+          formControlName="name"
+          matInput
+          placeholder="Ex. Pablo Echenique"
+        />
+      </mat-form-field>
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="addAddressField()"
+        >
+          Add address
+        </button>
+      </div>
+      <div
+        formArrayName="address"
+        *ngFor="let address of addressField.controls; let i = index"
+      >
+        <div class="address" [formGroupName]="i">
+          <mat-form-field>
+            <mat-label>Zip Code</mat-label>
+            <input formControlName="zip" matInput placeholder="Ex. 48698" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Text</mat-label>
+            <input
+              formControlName="text"
+              matInput
+              placeholder="Ex. Av Guid - Malave"
+            />
+          </mat-form-field>
+          <div>
+            <button
+              type="button"
+              (click)="removeAddressField(i)"
+              mat-raised-button
+              color="warn"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button mat-raised-button type="submit">Save</button>
+      </div>
+    </form>
+  </mat-step>
+  <!-- Verify order -->
+  <mat-step>
+    <ng-template matStepLabel>Verifiy order</ng-template>
+    <ul>
+      <li *ngFor="let product of products$ | async">
+        {{ product.name }}
+      </li>
+    </ul>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Buy</ng-template>
+  </mat-step>
+</mat-horizontal-stepper>

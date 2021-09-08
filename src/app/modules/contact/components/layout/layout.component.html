@@ -1,0 +1,13 @@
+<h1>{{ value$ | async }}</h1>
+<app-list
+  title="Sales"
+  [data]="salesList"
+  (add)="addItem(salesList, $event)"
+  (delete)="deleteItem(salesList, $event)"
+></app-list>
+<app-list
+  title="IT"
+  [data]="itList"
+  (add)="addItem(itList, $event)"
+  (delete)="deleteItem(itList, $event)"
+></app-list>

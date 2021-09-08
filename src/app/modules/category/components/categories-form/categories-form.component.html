@@ -1,0 +1,54 @@
+<form class="container" [formGroup]="form" (ngSubmit)="save($event)">
+  <h1>{{ title }}</h1>
+
+  <mat-form-field class="container_field" appearance="fill">
+    <mat-label>Name</mat-label>
+    <input
+      formControlName="name"
+      matInput
+      type="text"
+      placeholder="Example: Electronics"
+    />
+    <mat-error *ngIf="form.controls['name'].hasError('required')">
+      Name is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="form.controls['name'].hasError('minlength')">
+      Length must have min <strong>4 characters</strong>
+    </mat-error>
+    <mat-error *ngIf="form.controls['name'].hasError('not_available')">
+      Category already <strong>exist</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="container_field" appearance="fill">
+    <ngx-mat-file-input
+      formControlName="image"
+      placeholder="Required input"
+      [valuePlaceholder]="imageName || 'Please select a image'"
+      (change)="uploadFile($event)"
+    ></ngx-mat-file-input>
+    <mat-icon matSuffix>folder</mat-icon>
+    <mat-error *ngIf="form.controls['image'].hasError('required')">
+      Image is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div
+    class="container_field"
+    appearance="fill"
+    *ngIf="uploadProgress$ | async as progress"
+  >
+    <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+  </div>
+
+  <div class="upload" *ngIf="form.controls['image'].value">
+    <div class="upload_image">
+      <img [src]="form.controls['image'].value" alt="Category image" />
+    </div>
+  </div>
+  <div class="example-button-row">
+    <button mat-flat-button color="primary" (click)="(save)">
+      {{ action }}
+    </button>
+  </div>
+</form>
